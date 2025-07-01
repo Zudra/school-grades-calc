@@ -5,7 +5,7 @@ import (
 	"school-grades-calc/models"
 )
 
-func ExibirRetorno(saida models.NotaMedia) {
+func ExibirRetorno(saida models.ResultadoMedia) {
 	fmt.Printf("\nMédia das suas notas:\n")
 	fmt.Printf("%.2f\n\n", saida.Media)
 	fmt.Printf("Status de aprovação:\n")
