@@ -13,6 +13,10 @@ func CalcularMedia(entrada models.NotaEntrada) models.NotaMedia {
 
 	media = round(media)
 
+	return ClassificarAprovacao(media)
+}
+
+func ClassificarAprovacao(media float64) models.NotaMedia {
 	switch {
 	case media < 5:
 		return models.NotaMedia{Media: media, Status: "Reprovado"}
