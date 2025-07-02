@@ -1,8 +1,11 @@
 package services
 
-import "school-grades-calc/models"
+import (
+	"school-grades-calc/models"
+	"school-grades-calc/storage"
+)
 
-func CalcularMedia(entrada models.NotaEntrada) models.ResultadoMedia {
+func CalcularMedia(entrada models.NotaEntrada) (models.ResultadoMedia, error) {
 	var valorTotal float64
 
 	for _, valor := range entrada.Valores {
@@ -15,7 +18,12 @@ func CalcularMedia(entrada models.NotaEntrada) models.ResultadoMedia {
 
 	resultado := ClassificarAprovacao(entrada.Valores, media)
 
-	return resultado
+	err := storage.SalvarHistorico(resultado)
+	if err != nil {
+		return resultado, err
+	}
+
+	return resultado, nil
 }
 
 func ClassificarAprovacao(notas []float64, media float64) models.ResultadoMedia {

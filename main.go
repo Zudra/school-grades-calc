@@ -15,7 +15,10 @@ func main() {
 		return
 	}
 
-	resultado := services.CalcularMedia(notas)
+	resultado, err := services.CalcularMedia(notas)
+	if err != nil {
+		fmt.Println("Ocorreu um erro ao calcular e salvar sua média: ", err)
+	}
 
 	utils.ExibirRetorno(resultado)
 }
