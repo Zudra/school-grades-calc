@@ -1,24 +1,16 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/joho/godotenv"
+	"log"
 	"school-grades-calc/inputs"
-	"school-grades-calc/services"
-	"school-grades-calc/utils"
 )
 
 func main() {
-	notas, err := inputs.ColetarNotas()
+	err := godotenv.Load()
 	if err != nil {
-		fmt.Println("Ocorreu um erro ao receber suas notas: ", err)
-		return
+		log.Fatalf("Error loading .env file: %v", err)
 	}
 
-	resultado, err := services.CalcularMedia(notas)
-	if err != nil {
-		fmt.Println("Ocorreu um erro ao calcular e salvar sua média: ", err)
-	}
-
-	utils.ExibirRetorno(resultado)
+	inputs.Menu()
 }
